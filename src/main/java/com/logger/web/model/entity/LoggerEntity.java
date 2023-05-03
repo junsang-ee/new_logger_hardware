@@ -36,12 +36,12 @@ public class LoggerEntity extends CreationLocalDateTimeEntity {
     private UserEntity createdBy;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "loggerGroup")
-    private LoggerGroupEntity loggerGroup;
+    @JoinColumn(name = "group")
+    private LoggerGroupEntity group;
 
     @OneToOne
-    @JoinColumn(name = "loggerStatus")
-    private LoggerMeasurementRangeEntity loggerStatus;
+    @JoinColumn(name = "measurementRange")
+    private LoggerMeasurementRangeEntity measurementRange;
 
     @PrePersist
     public void onPrevisionPersist() {
