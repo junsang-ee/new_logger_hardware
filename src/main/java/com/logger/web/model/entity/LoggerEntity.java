@@ -3,7 +3,6 @@ package com.logger.web.model.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.logger.web.constant.LoggerStatus;
 import com.logger.web.model.entity.common.CreationLocalDateTimeEntity;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,7 +13,6 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity(name = "logger")
 public class LoggerEntity extends CreationLocalDateTimeEntity {
     private String name;

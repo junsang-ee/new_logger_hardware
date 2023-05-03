@@ -19,7 +19,7 @@ public class LoggerStatusHistoryEntity extends CreationLocalDateTimeEntity {
 
     private double humidity;
 
-    private int crash;
+    private int cumulativeCrash;
 
     @ManyToOne
     @JoinColumn(name = "order_info", nullable = false)
