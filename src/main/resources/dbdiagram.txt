@@ -1,0 +1,157 @@
+Table logger {
+  id varchar [primary key]
+  created_by varchar [note: 'FK N:1 (user)']
+  logger_group varchar [note: "FK N:1 (logger_group)"]
+  status int [note: 'WAIT, MOVE, ARRIVE']
+  serial_number int
+  name varchar
+  mac_address varchar
+  connection_at datetime
+  battery int
+  created_at datetime
+}
+
+Table logger_group {
+  id String [primary key]
+  logger_status varchar
+  created_at datetime
+  connect_count int
+  grouping_type int
+  name varchar
+}
+
+Table user {
+  id varchar [primary key]
+  notification varchar [note: "1:N (logger)"]
+  profile_image varchar
+  password varchar
+  name varchar
+  email varchar
+  created_at datetime
+}
+
+// logger
+Ref: logger.logger_group > logger_group.id
+Ref: logger.created_by > user.id
+
+
+
+
+// Table logger_group {
+//   id String [primary key]
+//   created_at datetime
+//   connect_count int
+//   grouping_type int
+//   name varchar
+//   logger_status varchar
+// }
+
+// Table logger {
+//   id varchar [primary key]
+//   created_by varchar [note: 'Who registered the logger']
+//   logger_group varchar
+//   status int [note: 'WAIT, MOVE, ARRIVE']
+//   serial_number int
+//   name varchar
+//   mac_address varchar
+//   connection_at datetime
+//   battery int
+//   created_at datetime
+// }
+
+// Table user {
+//   id varchar [primary key]
+//   notification varchar
+//   profile_image varchar
+//   password varchar
+//   name varchar
+//   email varchar
+//   created_at datetime
+// }
+
+// Table notification {
+//   id varchar [primary key]
+//   event_occurs int
+//   logistics_status int
+//   night_reception int
+// }
+
+// Table logger_status {
+//   id varchar [primary key]
+//   measurement_wating_time int
+//   data_measurement_interval int
+//   lowest_temperature double
+//   lowest_humidity double
+//   lowest_crash int
+//   highest_temperature double
+//   highest_humidity double
+//   highest_crash int
+//   created_at datetime
+// }
+
+// Table client {
+//   id varchar [primary key]
+//   name varchar
+//   address varchar
+//   created_at datetime
+// }
+
+// Table product {
+//   id varchar [primary key]
+//   name varchar
+//   cost bigint
+//   created_at datetime
+// }
+
+
+
+
+// Table order_product {
+//   id varchar [primary key]
+//   order_product_count int
+//   product varchar
+//   created_at datetime
+// }
+
+// Table order_info {
+//   id varchar [primary key]
+//   order_product varchar
+//   logger varchar
+//   client varchar
+//   order_number int
+//   created_at datetime
+// }
+
+// Table shipping {
+//   id varchar [primary key]
+//   order_info varchar
+//   arrived_at datetime
+//   created_at datetime
+// }
+
+// Table logger_status_history {
+//   id varchar [primary key]
+//   order_info varchar
+//   temperature double
+//   humidity double
+//   crash int
+//   created_at datetime
+// }
+
+// Ref: logger.logger_group > logger_group.id
+
+// Ref: "user"."id" < "logger"."created_by"
+
+// Ref: "notification"."id" < "user"."notification" //one-to-one
+
+// Ref: "order_info"."logger" > "logger"."id"
+
+// Ref: "client"."id" < "order_info"."client"
+
+
+
+// Ref: "order_info"."id" < "shipping"."order_info"
+
+// Ref: "order_product"."id" < "order_info"."order_product"
+
+// Ref: "product"."id" < "order_product"."product"
