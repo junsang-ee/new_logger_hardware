@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 @Getter
 @NoArgsConstructor
 @Entity(name = "company")
-public class ConpanyEntity extends CreationLocalDateTimeEntity {
+public class CompanyEntity extends CreationLocalDateTimeEntity {
     private String name;
 
     private String departmentName;

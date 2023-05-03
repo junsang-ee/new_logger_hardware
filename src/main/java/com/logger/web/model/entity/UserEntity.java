@@ -38,7 +38,7 @@ public class UserEntity extends CreationLocalDateTimeEntity implements Serializa
 
     @ManyToOne
     @JoinColumn(name = "company")
-    private ConpanyEntity company;
+    private CompanyEntity company;
 
     @PrePersist
     private void setDefaultRelationShipData() {
