@@ -1,6 +1,6 @@
 package com.logger.web.model.dto.request;
 
-import com.logger.web.model.entity.LoggerStatusEntity;
+import com.logger.web.model.entity.LoggerMeasurementRangeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -15,5 +15,5 @@ public class LoggerGroupSaveRequest {
 
     private List<String> loggerIdList;
 
-    private LoggerStatusEntity loggerStatus;
+    private LoggerMeasurementRangeEntity loggerStatus;
 }

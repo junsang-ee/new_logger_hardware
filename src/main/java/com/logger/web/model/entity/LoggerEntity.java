@@ -41,7 +41,7 @@ public class LoggerEntity extends CreationLocalDateTimeEntity {
 
     @OneToOne
     @JoinColumn(name = "loggerStatus")
-    private LoggerStatusEntity loggerStatus;
+    private LoggerMeasurementRangeEntity loggerStatus;
 
     @PrePersist
     public void onPrevisionPersist() {

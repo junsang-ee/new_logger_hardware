@@ -10,8 +10,8 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "logger_status")
-public class LoggerStatusEntity extends CreationLocalDateTimeEntity {
+@Entity(name = "logger_measurement_range")
+public class LoggerMeasurementRangeEntity extends CreationLocalDateTimeEntity {
     private double lowestTemperature;
 
     private double highestTemperature;
