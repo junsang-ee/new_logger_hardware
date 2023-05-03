@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import java.io.Serializable;
 
 @Setter
@@ -27,5 +30,9 @@ public class UserEntity extends CreationLocalDateTimeEntity implements Serializa
     private String profileImage;
 
     private String registrationCode;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "appPush")
+    private AppPushEntity appPush;
 
 }
