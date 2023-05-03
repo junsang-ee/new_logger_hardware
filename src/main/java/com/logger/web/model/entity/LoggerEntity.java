@@ -1,5 +1,6 @@
 package com.logger.web.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.logger.web.constant.LoggerStatus;
 import com.logger.web.model.entity.common.CreationLocalDateTimeEntity;
 import lombok.AllArgsConstructor;
@@ -7,10 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Setter
@@ -33,6 +31,16 @@ public class LoggerEntity extends CreationLocalDateTimeEntity {
     private double firmware;
 
     private LocalDateTime connectedAt;
+
+    @JsonManagedReference // 순환참조 방지
+    @ManyToOne
+    @JoinColumn(name = "createdBy", nullable = false)
+    private UserEntity createdBy;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "loggerGroup")
+    private LoggerGroupEntity loggerGroup;
+
 
     @PrePersist
     public void onPrevisionPersist() {
