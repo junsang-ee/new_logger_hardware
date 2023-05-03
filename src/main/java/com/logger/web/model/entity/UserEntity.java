@@ -6,10 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Setter
@@ -34,5 +31,19 @@ public class UserEntity extends CreationLocalDateTimeEntity implements Serializa
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "appPush")
     private AppPushEntity appPush;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "loginInfo")
+    private UserLoginInfoEntity loginInfo;
+
+    @ManyToOne
+    @JoinColumn(name = "company")
+    private ConpanyEntity company;
+
+    @PrePersist
+    private void setDefaultRelationShipData() {
+        this.appPush = new AppPushEntity();
+        this.loginInfo = new UserLoginInfoEntity();
+    }
 
 }
