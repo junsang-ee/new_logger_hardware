@@ -1,5 +1,6 @@
 package com.logger.web.model.entity.range;
 
+import com.logger.web.constant.CustomType;
 import com.logger.web.constant.TemperatureType;
 import com.logger.web.model.entity.common.CreationLocalDateTimeEntity;
 import lombok.Getter;
@@ -16,11 +17,12 @@ import javax.persistence.Enumerated;
 @Entity(name = "temperature_range")
 public class TemperatureRangeEntity extends CreationLocalDateTimeEntity {
 
-    @Enumerated(EnumType.STRING)
-    private TemperatureType type;
+    private String type;
 
-    private double lowestTemperature;
+    private int lowestTemperature;
 
-    private double highestTemperature;
+    private int highestTemperature;
+
+    private CustomType customType;
 
 }

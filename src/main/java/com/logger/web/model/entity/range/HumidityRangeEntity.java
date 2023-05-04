@@ -1,5 +1,6 @@
 package com.logger.web.model.entity.range;
 
+import com.logger.web.constant.CustomType;
 import com.logger.web.model.entity.common.CreationLocalDateTimeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,6 @@ public class HumidityRangeEntity extends CreationLocalDateTimeEntity {
     private double lowestHumidity;
 
     private double highestHumidity;
+
+    private CustomType customType;
 }
