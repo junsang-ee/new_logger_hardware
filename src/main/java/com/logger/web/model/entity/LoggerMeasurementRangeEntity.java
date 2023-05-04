@@ -1,30 +1,32 @@
 package com.logger.web.model.entity;
 
 import com.logger.web.model.entity.common.CreationLocalDateTimeEntity;
+import com.logger.web.model.entity.range.DefaultSingleCustomMeasurementRangeEntity;
+import com.logger.web.model.entity.range.HumidityRangeEntity;
+import com.logger.web.model.entity.range.TemperatureRangeEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity(name = "logger_measurement_range")
 public class LoggerMeasurementRangeEntity extends CreationLocalDateTimeEntity {
-    private double lowestTemperature;
 
-    private double highestTemperature;
+    @ManyToOne
+    @JoinColumn(name = "tempRange")
+    private TemperatureRangeEntity tempRange;
 
-    private double lowestHumidity;
+    @ManyToOne
+    @JoinColumn(name = "humidityRange")
+    private HumidityRangeEntity humidityRange;
 
-    private double highestHumidity;
-
-    private int lowestCrash;
-
-    private int highestCrash;
-
-    private int dataMeasurementInterval;
-
-    private int measurementWaitingTime;
+    @ManyToOne
+    @JoinColumn(name = "defaultSingleCustomMeasurementRange")
+    private DefaultSingleCustomMeasurementRangeEntity defaultSingleCustomMeasurementRange;
 }

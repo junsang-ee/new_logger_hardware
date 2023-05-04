@@ -39,7 +39,7 @@ public class LoggerEntity extends CreationLocalDateTimeEntity {
     @JoinColumn(name = "group")
     private LoggerGroupEntity group;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "measurementRange")
     private LoggerMeasurementRangeEntity measurementRange;
 
