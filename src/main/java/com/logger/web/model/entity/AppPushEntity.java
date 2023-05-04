@@ -18,9 +18,6 @@ import javax.persistence.PrePersist;
 public class AppPushEntity extends CreationLocalDateTimeEntity {
 
     @Enumerated(EnumType.STRING)
-    private ReceptionConsentType logisticsStatus;
-
-    @Enumerated(EnumType.STRING)
     private ReceptionConsentType eventOccurs;
 
     @Enumerated(EnumType.STRING)
@@ -28,7 +25,6 @@ public class AppPushEntity extends CreationLocalDateTimeEntity {
 
     @PrePersist
     private void prePersist() {
-        this.logisticsStatus = ReceptionConsentType.AGREEMENT;
         this.eventOccurs = ReceptionConsentType.AGREEMENT;
         this.nightReception = ReceptionConsentType.AGREEMENT;
     }
