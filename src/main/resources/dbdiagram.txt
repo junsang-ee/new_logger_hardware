@@ -1,9 +1,9 @@
 Table logger {
   id varchar [primary key]
-  logger_status varchar [note: "FK (logger)1 : 1(logger_status)"]
+  measurement_range varchar [note: "FK (logger)N : 1(logger_measurement_range)"]
   logger_group varchar [note: "FK (logger)N : 1(logger_group)"]
   created_by varchar [note: "FK (logger)N : 1(user)"]
-  status int [note: "WAIT, MOVE, ARRIVE"]
+  status varchar [note: "WAITING, MOVEMENT, ARRIVAL"]
   serial_number int
   name varchar
   mac_address varchar
@@ -12,22 +12,84 @@ Table logger {
   created_at datetime
 }
 
-Table logger_group {
-  id String [primary key]
-  logger_status varchar
+Table logger_measurement_range {
+  id varchar [primary key]
+  temp_range varchar [note: "(logger_measurement_range)N : 1(temperature_range)"]
+  humidity_range varchar [note: "(logger_measurement_range)N : 1(humidity_range)"]
+  default_single_custom_measurement_range varchar [note: "(logger_measurement_range)N : 1(default_single_custom_measurement_range)"]
   created_at datetime
-  connect_count int
-  grouping_type int
+}
+
+Table temperature_range {
+  id varchar [primary key]
+  type varchar
+  lowest_temperature int
+  highest_temperature int
+  custom_type varchar [note: "customType enum"]
+  created_at datetime
+}
+
+Table humidity_range {
+  id varchar [primary key]
+  lowest_humidify double
+  highest_humidify double
+  custom_type varchar [note: "customType enum"]
+  created_at datetime
+}
+
+Table default_single_measurement {
+  id varchar [primary key]
+  measurement_period int
+  measurement_latency int
+  crash_range int
+  created_at datetime
+}
+
+Table logger_group {
+  id varchar [primary key]
+  created_by varchar [note: "(logger_group)N : 1(user)"]
   name varchar
+  created_at datetime
 }
 
 Table user {
   id varchar [primary key]
-  notification varchar [note: "1:N (logger)"]
+  login_info varchar [note: "(user)1 : 1(login_info)"]
+  company varchar [note: "(user)1 : 1(company)"]
+  app_push varchar [note: "(user)1 : 1(app_push)"]
+  registration_code varchar
   profile_image varchar
+  phone_number varchar
   password varchar
   name varchar
   email varchar
+  created_at datetime
+}
+
+Table user_login_info {
+  id varchar [primary key]
+  temp_password varchar
+  login_fail_count int
+  updated_at datetime
+  created_at datetime
+}
+
+Table app_push {
+  id varchar [primary key]
+  night_reception varchar
+  event_occurs varchar
+  created_at datetime
+}
+
+Table company {
+  id varchar [primary key]
+  zip_code int
+  representative_number varchar
+  name varchar
+  detail_address varchar
+  department_name varchar
+  business_number varchar
+  address varchar
   created_at datetime
 }
 
@@ -73,12 +135,30 @@ Table order_info {
   created_at datetime
 }
 
+Table order_product {
+  id varchar [primary key]
+  product varchar [note: "FK (order_product)N : 1(product)"]
+  order_product_count int
+}
+
+Table product {
+  id varchar [primary key]
+  name varchar
+  cost bigint
+  created_at datetime
+}
+
+
+
 // logger
 Ref: logger.logger_group > logger_group.id
 Ref: logger.created_by > user.id
+Ref: logger.measurement_range > logger_measurement_range.id
 
-// orderInfo
+// order_info
 Ref: order_info.logger > logger.id
+Ref: order_info.client > client.id
+Ref: order_info.order_product - order_product.id
 
 // shipping
 Ref: shipping.order_info - order_info.id
@@ -89,10 +169,22 @@ Ref: logger_status_history.order_info > order_info.id
 // measurement_break_away_count
 Ref: measurement_break_away_count.order_info - order_info.id
 
-// Table order_product {
-//   id varchar [primary key]
-//   order_product_count int
-//   product varchar
-//   created_at datetime
-// }
+// logger_group
+Ref: logger_group.created_by > user.id
+
+// user
+Ref: user.login_info - user_login_info.id
+Ref: user.app_push - app_push.id
+Ref: user.company - company.id
+
+// logger_measurement_range
+Ref: logger_measurement_range.temp_range > temperature_range.id
+Ref: logger_measurement_range.humidity_range > humidity_range.id
+Ref: logger_measurement_range.default_single_custom_measurement_range > default_single_measurement.id
+
+// order_info
+Ref: product.id < order_product.product
+
+
+
 
