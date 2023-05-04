@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class UserServiceImpl implements UserSerivce {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserSerivce {
         userEntity.setEmail(userSaveRequest.getEmail());
         userEntity.setPassword(userSaveRequest.getPassword());
         userEntity.setPhoneNumber(userSaveRequest.getPhoneNumber());
+        if (userSaveRequest.getRegistrationCode() == null) {
+            userEntity.setRegistrationCode("testCode");
+        } else {
+            userEntity.setRegistrationCode(userSaveRequest.getRegistrationCode());
+        }
         return userEntity;
     }
 }

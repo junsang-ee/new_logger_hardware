@@ -13,4 +13,6 @@ public class UserSaveRequest {
     private String password;
 
     private String phoneNumber;
+
+    private String registrationCode;
 }

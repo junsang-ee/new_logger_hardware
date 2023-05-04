@@ -18,7 +18,7 @@ public class LoggerServiceImpl implements LoggerService{
 
     private final LoggerGroupRepository loggerGroupRepository;
 
-    private final UserSerivce userSerivce;
+    private final UserService userService;
 
     @Transactional
     @Override
@@ -48,7 +48,7 @@ public class LoggerServiceImpl implements LoggerService{
         logger.setMacAddress(loggerSaveRequest.getMacAddress());
         logger.setSerialNumber(loggerSaveRequest.getSerialNumber());
         logger.setLoggerGroup(null);
-        logger.setCreatedBy(userSerivce.get(userId));
+        logger.setCreatedBy(userService.get(userId));
         return logger;
     }
 

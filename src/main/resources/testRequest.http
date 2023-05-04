@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/user
+Content-Type: application/json
+
+{
+    "name":"hwangjunsang",
+    "email":"testEmail",
+    "password":"testPassword",
+    "phoneNumber":"010-4305-3451",
+    "registrationCode" :"TestRegistrationCode"
+}
