@@ -36,8 +36,8 @@ public class LoggerEntity extends CreationLocalDateTimeEntity {
     private UserEntity createdBy;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "group")
-    private LoggerGroupEntity group;
+    @JoinColumn(name = "loggerGroup")
+    private LoggerGroupEntity loggerGroup;
 
     @ManyToOne
     @JoinColumn(name = "measurementRange")

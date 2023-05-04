@@ -18,7 +18,7 @@ import java.util.List;
 public class LoggerGroupEntity extends CreationLocalDateTimeEntity {
     private String name;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "loggerGroup")
     private List<LoggerEntity> loggers;
 
     @ManyToOne
