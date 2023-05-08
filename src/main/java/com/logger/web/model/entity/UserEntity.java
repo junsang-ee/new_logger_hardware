@@ -29,8 +29,8 @@ public class UserEntity extends CreationLocalDateTimeEntity implements Serializa
     private String registrationCode;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "appPush")
-    private AppPushEntity appPush;
+    @JoinColumn(name = "notificationPreferences")
+    private UserNotificationPreferencesEntity notificationPreferences;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "loginInfo")
@@ -42,7 +42,7 @@ public class UserEntity extends CreationLocalDateTimeEntity implements Serializa
 
     @PrePersist
     private void setDefaultRelationShipData() {
-        this.appPush = new AppPushEntity();
+        this.notificationPreferences = new UserNotificationPreferencesEntity();
         this.loginInfo = new UserLoginInfoEntity();
     }
 
